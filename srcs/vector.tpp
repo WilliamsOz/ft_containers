@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   vector.tpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 10:07:31 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/08 12:18:05 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/11/08 11:25:06 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/11/08 12:17:50 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_containers.hpp"
 
-int main( void )
+template<class T, class Alloc >
+vector<T, Alloc>::vector( void )
 {
-	vector<int>	v;
-	int	a = 42;
+	std::cout << "Coucou" << std::endl;
+	return ;
+}
 
-	std::cout << a << std::endl;
+template<class T, class Alloc >
+vector<T, Alloc>::~vector( void )
+{
 
-	return 0;
+	std::cout << "Coucou aussi" << std::endl;
+	return ;
 }
