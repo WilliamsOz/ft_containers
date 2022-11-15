@@ -6,11 +6,11 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:25:06 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/15 14:41:04 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:22:47 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/vector.hpp"
+#include "vector.hpp"
 
 template<class T, class Alloc >
 ft::vector<T, Alloc>::vector( const allocator_type &alloc )

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:18:46 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/15 14:41:07 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:22:16 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ class vector
 		// explicit vector(  );
 		// explicit vector(  );
 		~vector();
+		pointer	begin(){ return this->_start; };
 		// iterator<T>	begin();
 
 
@@ -50,6 +51,6 @@ class vector
 
 }
 
-#include "../srcs/vector.tpp"
+#include "vector.tpp"
 
 #endif

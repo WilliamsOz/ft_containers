@@ -6,11 +6,11 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:24:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/15 14:40:39 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:22:48 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/iterator.hpp"
+#include "iterator.hpp"
 
 template <class Category, class T, class Distance, class Pointer, class Reference>
 ft::iterator<Category, T, Distance, Pointer, Reference>::iterator( void )
@@ -19,11 +19,20 @@ ft::iterator<Category, T, Distance, Pointer, Reference>::iterator( void )
 }
 
 template <class Category, class T, class Distance, class Pointer, class Reference>
-ft::iterator<Category, T, Distance, Pointer, Reference>::iterator( pointer ptr )
+ft::iterator<Category, T, Distance, Pointer, Reference>::iterator( Pointer ptr )
 {
 	this->_ptr = ptr;
 	return ;
 }
+
+template <class Category, class T, class Distance, class Pointer, class Reference>
+ft::iterator<Category, T, Distance, Pointer, Reference>::iterator( ft::iterator<Category, T, Distance, Pointer, Reference> &copy )
+{
+	if (*this != copy)
+		*this = copy;
+	return ;
+}
+
 
 template <class Category, class T, class Distance, class Pointer, class Reference>
 ft::iterator<Category, T, Distance, Pointer, Reference>::~iterator( void )
@@ -31,27 +40,27 @@ ft::iterator<Category, T, Distance, Pointer, Reference>::~iterator( void )
 	return ;
 }
 
-// template <class Category, class T, class Distance, class Pointer, class Reference>
-// ft::iterator::reference ft::iterator<Category, T, Distance, Pointer, Reference>::operator*( void ) const
-// {
-// 	return this->*_ptr;
-// }
+template <class Category, class T, class Distance, class Pointer, class Reference>
+Reference ft::iterator<Category, T, Distance, Pointer, Reference>::operator*( void ) const
+{
+	return *this->_ptr;
+}
+
+template <class Category, class T, class Distance, class Pointer, class Reference>
+Pointer ft::iterator<Category, T, Distance, Pointer, Reference>::operator->( void )
+{
+	return this->_ptr;
+}
+
+template <class Category, class T, class Distance, class Pointer, class Reference>
+ft::iterator<Category, T, Distance, Pointer, Reference>& ft::iterator<Category, T, Distance, Pointer, Reference>::operator++( void )
+{
+	this->_ptr++;
+	return *this;
+}
 
 // template <class Category, class T, class Distance, class Pointer, class Reference>
-// typename ft::iterator<Category, T>::pointer ft::iterator<Category, T, Distance, Pointer, Reference>::operator->( void )
-// {
-// 	return this->_ptr;
-// }
-
-// template <class Category, class T, class Distance, class Pointer, class Reference>
-// iterator& ft::iterator<Category, T, Distance, Pointer, Reference>::operator++( void )
-// {
-// 	this->_ptr++;
-// 	return *this;
-// }
-
-// template <class Category, class T, class Distance, class Pointer, class Reference>
-// iterator& ft::iterator<Category, T, Distance, Pointer, Reference>::operator++( int )
+// ft::iterator<Category, T, Distance, Pointer, Reference>& ft::iterator<Category, T, Distance, Pointer, Reference>::operator++( int )
 // {
 // 	ft::iterator<class Category, class T>	tmp = *this;
 
