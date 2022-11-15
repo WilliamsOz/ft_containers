@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   containers.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 10:07:31 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/15 12:50:09 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/11/07 10:17:05 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/11/15 14:42:27 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_containers.hpp"
+#ifndef CONTAINERS_HPP
+#define CONTAINERS_HPP
 
-int main( void )
-{
-	ft::vector<int>	v(42, 42);
-	ft::iterator<int, int>	it;
+#include "iterator.hpp"
+#include "vector.hpp"
+// #include "stack.hpp"
+// #include "map.hpp"
+// #include "set.hpp"
 
-	return 0;
-}
+
+#endif
