@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:37:03 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/22 14:05:21 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:13:10 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,13 @@ class vectorIterator : public ft::iterator<random_access_iterator_tag, T>
 	pointer	_ptr;
 
 	public:
-		vectorIterator( void )
-		: _ptr();
+		vectorIterator( void ) : _ptr(){ };
 		
-		explicit vectorIterator( pointer ptr )
-		: _ptr(ptr );
+		explicit vectorIterator( pointer ptr ) : _ptr(ptr ){ };
 		
-		vectorIterator( const vectorIterator &copy )
-		: _ptr(copy._ptr);
+		vectorIterator( const vectorIterator &copy ) : _ptr(copy._ptr){ };
 		
-		~vectorIterator();
+		~vectorIterator() { };
 
 
 		vectorIterator & operator=( const vectorIterator &rhs ){
