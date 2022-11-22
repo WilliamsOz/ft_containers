@@ -6,7 +6,7 @@
 #    By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 10:10:04 by wiozsert          #+#    #+#              #
-#    Updated: 2022/11/15 12:49:40 by wiozsert         ###   ########.fr        #
+#    Updated: 2022/11/22 14:07:17 by wiozsert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC = main.cpp
 
 SRCS = $(addprefix ./srcs/, $(SRC) )
 
-FLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -Iinc -Isrcs
+FLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -Iinc/utils -Iinc
 
 OBJ = $(SRCS:.cpp=.o)
 

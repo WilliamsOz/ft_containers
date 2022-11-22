@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:17:05 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/15 18:22:32 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:08:04 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "iterator.hpp"
 #include "vector.hpp"
+#include "vectorIterator.hpp"
 // #include "stack.hpp"
 // #include "map.hpp"
 // #include "set.hpp"
