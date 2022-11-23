@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:37:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/22 14:05:15 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/23 19:39:07 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "extern_library.hpp"
 
 namespace ft{
-
 	//empty class types used to indicate iterator categories
 	struct input_iterator_tag {};
 	struct output_iterator_tag {};
@@ -63,6 +62,105 @@ struct iterator_traits<const T*>
 	typedef	T*							pointer;
 	typedef	T&							reference;
 	typedef	random_access_iterator_tag	iterator_category;
+};
+
+template <class Iterator>
+class reverse_iterator
+{
+	public :
+	typedef	Iterator													iterator_type;
+	typedef typename ft::iterator_traits<Iterator>::iterator_category	iterator_category;
+	typedef typename ft::iterator_traits<Iterator>::value_type			value_type;
+	typedef typename ft::iterator_traits<Iterator>::difference_type		difference_type;
+	typedef typename ft::iterator_traits<Iterator>::pointer				pointer;
+	typedef typename ft::iterator_traits<Iterator>::reference			reference;
+
+
+	public :
+		/*\___
+		 *	default constructor -> Constructs a reverse iterator that points to no object.
+		\*/
+		reverse_iterator( void ) : _it(){  }
+
+		/*\___
+		 * initalization constructor -> Constructs a reverse iterator from some original iterator it.
+		\*/
+		explicit reverse_iterator (iterator_type it) : _it(it){  };
+
+		/*\___
+		 * copy / type-cast constructor -> Constructs a reverse iterator from some other reverse iterator.
+		\*/
+		template <class Iter>
+		reverse_iterator(const reverse_iterator<Iter>& rev_it) : _it(rev_it.base()){  };
+
+		/*\___
+		 * default destructor -> to keep coplien form.
+		\*/
+		virtual ~reverse_iterator( void ) {  };
+
+		/*\___
+		 * assignement constructor -> to keep coplien form.
+		\*/
+		reverse_iterator<Iterator>&	operator=( const reverse_iterator<Iterator> &rhs ){
+			if (this != &rhs)
+				this->_it = rhs._it;
+			return *this;
+		};
+
+		/*\___
+		 * Returns a copy of the base iterator.
+		\*/
+		iterator_type	base() const{
+			return this->_it;
+		};
+
+		/*\
+		 * Returns a reference to the element pointed to by the iterator.
+		 * Internally, the function decreases a copy of its base iterator and returns the result of dereferencing it.
+		\*/
+		reference operator*() const{
+			iterator_type	tmp = this->_it;
+
+			return (*(--tmp));
+		};
+
+		/*\
+		 * 
+		\*/
+
+
+		/*\
+		 * 
+		\*/
+
+
+		/*\
+		 * 
+		\*/
+
+
+		/*\
+		 * 
+		\*/
+
+
+		/*\
+		 * 
+		\*/
+
+
+		/*\
+		 * 
+		\*/
+
+
+		/*\
+		 * 
+		\*/
+
+
+	protected :
+	iterator_type	_it;
 };
 
 };

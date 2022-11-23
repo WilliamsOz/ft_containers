@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:37:03 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/22 14:13:10 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:57:14 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,20 @@ class vectorIterator : public ft::iterator<random_access_iterator_tag, T>
 			return *this;
 		};
 
-		reference	operator*() const { return *this->_ptr; };
-		pointer		operator->() { return this->_ptr; };
+		reference	operator*() const {
+			return *this->_ptr;
+		};
 
-		vectorIterator<T>	operator++(){  // ++_ptr
+		pointer		operator->() {
+			return this->_ptr;
+		};
+
+		vectorIterator<T>&	operator++( void ){  // ++_ptr
 			++this->_ptr;
 			return *this;
 		};
 
-		vectorIterator<T>	operator--(){ // --_ptr
+		vectorIterator<T>&	operator--( void ){ // --_ptr
 			--this->_ptr;
 			return *this;
 		};
@@ -63,23 +68,40 @@ class vectorIterator : public ft::iterator<random_access_iterator_tag, T>
 		vectorIterator<T>	operator++( int ){// _ptr++
 			ft::vectorIterator<T>	tmp(*this);
 
-			this->_ptr++;
+			++this->_ptr;
 			return tmp;
 		};
 
 		vectorIterator<T>	operator--( int ){ // _ptr--
 			ft::vectorIterator<T>	tmp(*this);
 
-			this->_ptr--;
+			--this->_ptr;
 			return tmp;
 		};
 
-		bool				operator==( const vectorIterator &rhs ) const{ return (rhs._ptr == this->_ptr); };
-		bool				operator!=( const vectorIterator &rhs ) const{ return (rhs._ptr != this->_ptr); };
-		bool				operator<( const vectorIterator &rhs ) const{ return (rhs._ptr < this->_ptr); };
-		bool				operator<=( const vectorIterator &rhs ) const{ return (rhs._ptr <= this->_ptr); };
-		bool				operator>( const vectorIterator &rhs ) const{ return (rhs._ptr > this->_ptr); };
-		bool				operator>=( const vectorIterator &rhs ) const{ return (rhs._ptr >= this->_ptr); };
+		bool				operator==( const vectorIterator &rhs ) const{
+			return (rhs._ptr == this->_ptr);
+		};
+
+		bool				operator!=( const vectorIterator &rhs ) const{
+			return (rhs._ptr != this->_ptr);
+		};
+
+		bool				operator<( const vectorIterator &rhs ) const{
+			return (rhs._ptr < this->_ptr);
+		};
+
+		bool				operator<=( const vectorIterator &rhs ) const{
+			return (rhs._ptr <= this->_ptr);
+		};
+
+		bool				operator>( const vectorIterator &rhs ) const{
+			return (rhs._ptr > this->_ptr);
+		};
+
+		bool				operator>=( const vectorIterator &rhs ) const{
+			return (rhs._ptr >= this->_ptr);
+		};
 
 };
 

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:07:31 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/22 15:41:43 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/23 19:27:31 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,21 @@
 
 int main( void )
 {
-	ft::vector<int>	v(4, 42);
+	std::vector<int>	vr(4, 42);
+	ft::vector<int>		vm(4, 42);
 
-	std::cout << v.empty() << std::endl;
+	std::reverse_iterator<int>	lol;
+	std::vector<int>::iterator	itr;
+	itr = vr.begin();
+	ft::vector<int>::iterator	itm;
+	itm = vm.begin();
+	std::cout << *itm << std::endl;
+	// std::vector<int>::iterator	itb = v.begin();
+	// std::vector<int>::iterator	ite = v.end();
+	// ptrdiff_t	ptr1 = ite - itb;
+
+	// std::cout << ptr1 << std::endl;
+	// std::cout << v.empty() << std::endl;
 	// ft::vectorIterator<int>	itb(v.begin());
 	// ft::vectorIterator<int>	ite(v.end());
 
