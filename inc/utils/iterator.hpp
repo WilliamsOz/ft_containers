@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:37:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/24 12:26:47 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/24 14:10:24 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ struct iterator
 	typedef Reference	reference;
 	typedef Category	iterator_category;
 };
-
 
 //\-----------------------------------iterator_traits-----------------------------------\/
 template< class Iterator >
@@ -280,6 +279,21 @@ class reverse_iterator
 			return (rhs.base() - lhs.base());
 		};
 };
+
+
+//\-----------------------------------other_usefull_functions-----------------------------------\/
+template<class inputIterator>
+typename iterator_traits<inputIterator>::difference_type distance_between_iterators(inputIterator first, inputIterator last){
+	ft::iterator_traits<inputIterator>::difference_type	count;
+
+	count = 0;
+	while (first != last)
+	{
+		count++;
+		first++;
+	}
+	return count;
+}
 
 };
 

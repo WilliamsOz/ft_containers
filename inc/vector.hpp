@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:18:46 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/24 12:27:24 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/24 18:14:30 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ class vector
 	typedef typename allocator_type::const_reference		const_reference;//const T&
 	typedef typename ft::vectorIterator<value_type>			iterator;
 	typedef typename ft::vectorIterator<const value_type>	const_iterator;
-	typedef typename allocator_type::difference_type		difference_type;//
+	typedef typename allocator_type::difference_type		difference_type;
 	typedef typename allocator_type::size_type				size_type;
-	
+	typedef typename ft::reverse_iterator<iterator>			reverse_iterator;
+	typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 	
 
 	private :
@@ -51,10 +52,11 @@ class vector
 
 	public :
 
-		/*\___
-		 * Empty Container constructor (default constructor) -> Constructs an empty container with no elements.
-		 * @allocator_type : Allocator object.
-		\*/
+	//\-----------------------------------Constructors-----------------------------------\/
+
+		/*___
+		 @Empty Container constructor (default constructor) -> Constructs an empty container with no elements.
+			*/
 		explicit vector( const allocator_type& alloc = allocator_type() ){
 			std::cout << "Default Constructor" << std::endl;
 			this->_alloc = alloc;
@@ -66,16 +68,13 @@ class vector
 		};
 
 
-		/*\___
-		 * Fill Constructor -> Constructs a container with n elements.
+		/*___
+		 @Fill Constructor -> Constructs a container with n elements.
 			Each element is a copy of val.
-		 * @size_type : Number of elements in the container at construction. 
-		 * @value_type : Value to fill the container with.
-			Each n elements will be initialized to a copy of this value.
-		 * @allocator_type : Allocator object.
-		\*/
-		explicit vector( size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type() ){
-			std::cout << "Fill Constructor" << std::endl;
+			*/
+		explicit vector( size_type n,
+							const value_type& val = value_type(),
+								const allocator_type& alloc = allocator_type() ){
 			this->_alloc = alloc;
 			this->_size = n;
 			this->_capacity = n;
@@ -89,84 +88,142 @@ class vector
 			return ;
 		};
 
-		/*\___
-		 * Range Constructor -> Constructs a container with as many elements as the range [first,last),
+		/*___
+		 @Range Constructor -> Constructs a container with as many elements as the range [first,last),
 			with each element constructed from its corresponding element in that range, in the same order.
-		 * 
-		\*/
-		// template<class InputIterator>
-		// vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()){
-		// 	(void)first;
-		// 	(void)last;
-		// 	(void)alloc;
-		// 	std::cout << "Range Constructor" << std::endl;
-		// 	return ;
-		// };
-
-		/*\___
-		 * Copy Constructor
-		\*/
-		// vector (const vector& x){
-			
-		// };
-
-		/*\___
-		 *	Default Destructor
-		 *	This destroys all container elements, and deallocates all the storage capacity allocated
-			by the vector using its allocator.
-		\*/
-		~vector(){
-			for (size_type	i = 0 ; i < this->_size ; i++)
+			*/
+		template<class InputIterator>
+		vector(InputIterator first,
+				InputIterator last,
+					const allocator_type& alloc = allocator_type(),
+						typename ft::enable_if<ft::is_input_iterator<InputIterator>::value, InputIterator>::type* = NULL){
+			this->_alloc = alloc;
+			this->_size = ft::distance_between_iterators(first, last);
+			this->capacity = this->size;
+			this->_start = this->_alloc.allocate(this->capacity);
+			this->_end = this->_start;
+			while (first != last)
 			{
-				this->_end--;
-				this->_alloc.destroy(this->_end);
+				this->_alloc.construct(this->_end, *first);
+				this->_end++;
+				first++;
 			}
+			return ;
+		};
+
+		/*___
+		 @Copy Constructor -> Constructs a container with a copy of each of the elements in x, in the same order
+			*/
+		vector (const vector &src){
+			this->_size = src.size();
+			this->_capacity = this->_size;
+			this->_start = this->_alloc.allocate(n);
+			this->_end = this->_start;
+			for (size_t i = 0 ; i < this->_size ; i++)
+			{
+				this->_alloc.construct(this->_end, *this->_end)
+				this->_end++;
+			}
+		};
+
+
+	//\-----------------------------------Destructor-----------------------------------\/
+
+		/*___
+		 @Default Destructor
+		 @This destroys all container elements, and deallocates all the storage capacity allocated
+			by the vector using its allocator.
+			*/
+		~vector(){
 			this->_alloc.deallocate(this->_start, this->_capacity);
 			return ;
 		};
 
-		/*\
-		 * Iterators member functions
-		 */
-		iterator	begin( void ){
+
+		//operator= https://en.cppreference.com/w/cpp/container/vector/operator%3D
+
+		template <class InputIterator>
+		void assign (InputIterator first, InputIterator last){
+			(void)first;
+			(void)last;
+			return ;
+		};
+
+		void assign (size_type n, const value_type& val){
+			(void)n;
+			(void)val;
+			return ;
+		};
+
+		allocator_type get_allocator( void ) const{
+			return this->_alloc;
+		};
+
+	//\-----------------------------------Element access-----------------------------------\/
+
+		// reference	at( size_type n );
+
+		// const_reference at( size_type n ) const{
+		// 	(void)n;
+		// };
+
+		value_type&	operator[]( size_t index ) {
+			return this->_start[index];
+		};
+
+		// reference	front();
+
+		// const_reference	front() const;
+
+		// reference back();
+
+		// const_reference back() const;
+
+		// value_type* data() noexcept;
+
+		// const value_type* data() const noexcept;
+
+	//\-----------------------------------Iterators-----------------------------------\/
+
+		iterator				begin( void ){
 			return (iterator(this->_start));
 		};
 
-		iterator	end( void ){
+		const_iterator			begin( void ) const{
+			return (const_iterator(this->_start));
+		};
+
+		reverse_iterator		rbegin( void ){
+			return (reverse_iterator(this->end()))
+		};
+
+		const_reverse_iterator	rbegin( void ) const{
+			return (const_reverse_iterator(this->end()))
+		};
+
+		iterator				end( void ){
 			return (iterator(this->_end));
 		};
 
-		//TO DO
-		// reverse_iterator rbegin(){
-			
-		// };
-
-		//TO DO
-		// reverse_iterator rend(){
-			
-		// };
-
-		const_iterator	cbegin() const{
-			const_pointer	constPTR = this->_start;
-			return (constPTR);
+		const_iterator			end( void ) const{
+			return (const_iterator(this->_end));
 		};
 
-		const_iterator	cend(){
-			const_pointer constPTR = this->_end;
-			return (constPTR);
+		reverse_iterator 		rend(){
+			return (reverse_iterator(this->begin()))
 		};
 
-		// const_reverse_iterator	crbegin(){
+		const_reverse_iterator	rend() const{
+			return (const_reverse_iterator(this->begin()))
+		};
 
-		// };
 
-		// const_reverse_iterator	crend(){
-			
-		// };
-/*---------------------------------------------------------------------------------------------------------------------*/
-		/*\
-		 * Capacity member functions
-		 */
+	//\-----------------------------------Capacity-----------------------------------\/
+
+		bool		empty() const {
+			return (this->size() == 0 ? true : false);
+		};
+
 		size_type	size() const {
 			return this->_end - this->_start;
 		};
@@ -175,74 +232,69 @@ class vector
 			return allocator_type().max_size();
 		};
 
-		//TO DO
-		void		resize(size_type n, value_type val = value_type()){
+		void		reserve( size_type n ){
 			(void)n;
-			(void)val;
 		};
 
 		size_type	capacity() const {
 			return this->_capacity;
 		};
 
-		bool		empty() const {
-			return (this->size() == 0 ? true : false);
+
+	//\-----------------------------------Modifiers-----------------------------------\/
+
+		void clear( void ){
+			for (size_type	i = 0 ; i < this->_size ; i++)
+			{
+				this->_end--;
+				this->_alloc.destroy(this->_end);
+			}
+			return ;
 		};
 
-		//TO DO
-		void		reserve( size_type n ){
+		iterator insert (iterator position, const value_type& val){;
+			(void)position;
 			(void)n;
+			(void)val;
+			return ;
 		};
 
-		//TO DO
-		void		shrink_to_fit() {
-			
+		template <class InputIterator>
+		void insert(iterator position, InputIterator first, InputIterator last){
+			(void)position;
+			(void)first;
+			(void)last;
+			return ;
 		};
 
-/*---------------------------------------------------------------------------------------------------------------------*/
+		// iterator erase (iterator position){
+			// (void)position;
+		// };
 
-		/*\
-		 * Element Access member functions
-		 */
-		value_type&	operator[]( size_t index ) { return this->_start[index]; };
-		// reference	at( size_type n );
-		// const_reference at( size_type n ) const;
-		// reference	front();
-		// const_reference	front() const;
-		// reference back();
-		// const_reference back() const;
-		// value_type* data() noexcept;
-		// const value_type* data() const noexcept;
+		// iterator erase (iterator first, iterator last){
+		// 	(void)first;
+		// 	(void)last;
+		// };
 
+		void push_back (const value_type& val){
+			(void)val;
+			return ;
+		};
 
-		/**
-		 * Modifiers
-		 **/
-		// template <class InputIterator>
-		// void assign (InputIterator first, InputIterator last);
+		void pop_back( void ){
+			return ;
+		};
 
-		// void assign (size_type n, const value_type& val);
-		// void push_back (const value_type& val);
-		// void pop_back();
-		// iterator insert (iterator position, const value_type& val);
-		// void insert (iterator position, size_type n, const value_type& val);
+		void		resize(size_type n, value_type val = value_type()){
+			(void)n;
+			(void)val;
+			return ;
+		};
 
-		// template <class InputIterator>
-		// void insert (iterator position, InputIterator first, InputIterator last);
-
-		// iterator erase (iterator position);
-		// iterator erase (iterator first, iterator last);
-		// void swap (vector& x);
-		// void clear();
-
-		// template <class... Args>
-		// iterator emplace (const_iterator position, Args&&... args);
-
-		// template <class... Args>
-		// void emplace_back (Args&&... args);
-
-		// allocator_type get_allocator() const;
-
+		void swap (vector& x){
+			(void)x;
+			return ;
+		};
 };
 
 };

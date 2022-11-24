@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 10:56:40 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/23 12:26:22 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:35:06 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,6 @@
 #include "extern_library.hpp"
 
 namespace ft{
-
-// template<class T, T v>
-// struct integral_constant{
-// 	static const T	value;
-// 	typedef T	value_type;
-// 	typedef integral_constant<T, v>	type;
-
-// 	operator T(){ return v; }
-// };
-
-// typedef integral_constant<bool, false>	false_type;
-// typedef integral_constant<bool, true>	true_type;
 
 template<class T>
 struct is_integral : std::false_type {};
