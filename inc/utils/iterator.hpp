@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:37:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/24 14:10:24 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:10:01 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,11 +280,9 @@ class reverse_iterator
 		};
 };
 
-
-//\-----------------------------------other_usefull_functions-----------------------------------\/
-template<class inputIterator>
-typename iterator_traits<inputIterator>::difference_type distance_between_iterators(inputIterator first, inputIterator last){
-	ft::iterator_traits<inputIterator>::difference_type	count;
+template<class InputIterator>
+typename iterator_traits<InputIterator>::difference_type distance_between_iterators(InputIterator first, InputIterator last){
+	typename ft::iterator_traits<InputIterator>::difference_type	count;
 
 	count = 0;
 	while (first != last)

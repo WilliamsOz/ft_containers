@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:18:46 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/24 18:14:30 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:10:54 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,18 +96,20 @@ class vector
 		vector(InputIterator first,
 				InputIterator last,
 					const allocator_type& alloc = allocator_type(),
-						typename ft::enable_if<ft::is_input_iterator<InputIterator>::value, InputIterator>::type* = NULL){
+						typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL){
+			(void)first;
+			(void)last;
 			this->_alloc = alloc;
-			this->_size = ft::distance_between_iterators(first, last);
-			this->capacity = this->size;
-			this->_start = this->_alloc.allocate(this->capacity);
+			// this->_size = ft::distance_between_iterators(first, last);
+			this->_capacity = this->_size;
+			this->_start = this->_alloc.allocate(this->_capacity);
 			this->_end = this->_start;
-			while (first != last)
-			{
-				this->_alloc.construct(this->_end, *first);
-				this->_end++;
-				first++;
-			}
+			// while (first != last)
+			// {
+			// 	this->_alloc.construct(this->_end, *first);
+			// 	this->_end++;
+			// 	first++;
+			// }
 			return ;
 		};
 
@@ -117,11 +119,11 @@ class vector
 		vector (const vector &src){
 			this->_size = src.size();
 			this->_capacity = this->_size;
-			this->_start = this->_alloc.allocate(n);
+			this->_start = this->_alloc.allocate(this->_size);
 			this->_end = this->_start;
 			for (size_t i = 0 ; i < this->_size ; i++)
 			{
-				this->_alloc.construct(this->_end, *this->_end)
+				this->_alloc.construct(this->_end, *this->_end);
 				this->_end++;
 			}
 		};
@@ -135,6 +137,7 @@ class vector
 			by the vector using its allocator.
 			*/
 		~vector(){
+			this->clear();
 			this->_alloc.deallocate(this->_start, this->_capacity);
 			return ;
 		};
@@ -194,11 +197,11 @@ class vector
 		};
 
 		reverse_iterator		rbegin( void ){
-			return (reverse_iterator(this->end()))
+			return (reverse_iterator(this->end()));
 		};
 
 		const_reverse_iterator	rbegin( void ) const{
-			return (const_reverse_iterator(this->end()))
+			return (const_reverse_iterator(this->end()));
 		};
 
 		iterator				end( void ){
@@ -210,11 +213,11 @@ class vector
 		};
 
 		reverse_iterator 		rend(){
-			return (reverse_iterator(this->begin()))
+			return (reverse_iterator(this->begin()));
 		};
 
 		const_reverse_iterator	rend() const{
-			return (const_reverse_iterator(this->begin()))
+			return (const_reverse_iterator(this->begin()));
 		};
 
 
@@ -243,7 +246,7 @@ class vector
 
 	//\-----------------------------------Modifiers-----------------------------------\/
 
-		void clear( void ){
+		void	clear( void ){
 			for (size_type	i = 0 ; i < this->_size ; i++)
 			{
 				this->_end--;
@@ -252,24 +255,23 @@ class vector
 			return ;
 		};
 
-		iterator insert (iterator position, const value_type& val){;
+		iterator	insert (iterator position, const value_type& val){;
 			(void)position;
-			(void)n;
 			(void)val;
 			return ;
 		};
 
-		template <class InputIterator>
-		void insert(iterator position, InputIterator first, InputIterator last){
+		template<class InputIterator>
+		void	insert(iterator position, InputIterator first, InputIterator last){
 			(void)position;
 			(void)first;
 			(void)last;
 			return ;
 		};
 
-		// iterator erase (iterator position){
-			// (void)position;
-		// };
+		iterator	erase(iterator position){
+			(void)position;
+		};
 
 		// iterator erase (iterator first, iterator last){
 		// 	(void)first;

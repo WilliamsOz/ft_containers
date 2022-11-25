@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:07:31 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/24 13:53:50 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:08:45 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int main( void )
 	// vr.push_back(0);
 	
 	// std::reverse_iterator<std::vector<int>::iterator>	it = vr.rend();
-	ft::vector<int>		vm(4, 42);
+	ft::vector<int>::iterator::iterator_category::input_iterator_tag	it;
+	ft::vector<int>::iterator::iterator_category::input_iterator_tag	it2;
+	ft::vector<int>		vm(it, it2);
 
 	// std::iterator_traits<int>	it;
 	// std::reverse_iterator<int>	lol;

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:17:05 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/24 13:20:24 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/25 18:02:43 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define CONTAINERS_HPP
 
 #include "iterator.hpp"
-#include "is_input_iterator.hpp"
 #include "is_integral.hpp"
 #include "enable_if.hpp"
 #include "vectorIterator.hpp"
