@@ -1,0 +1,1 @@
+reset ; make re ; clear ; ./ft_containers
