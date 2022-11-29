@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:18:46 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/28 16:26:33 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/29 13:36:59 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ class vector
 		/*___
 		 @Returns a copy of the allocator object associated with the vector.
 			*/
-		allocator_type get_allocator( void ) const{
+		allocator_type	get_allocator( void ) const{
 			return this->_alloc;
 		};
 
@@ -223,7 +223,7 @@ class vector
 		 @Returns a const_reference to the element at position n in the vector.
 		 @The function automatically checks whether n is within the bounds of valid elements in the vector
 			*/
-		const_reference at( size_type n ) const{
+		const_reference	at( size_type n ) const{
 			if (n >= this->size()){
 				throw std::out_of_range("vector");
 			}
@@ -255,14 +255,14 @@ class vector
 		/*___
 		 @Returns a reference to the last element in the vector.
 			*/
-		reference back( void ) {
+		reference	back( void ) {
 			return *(this->_end - 1);
 		};
 
 		/*___
 		 @Returns a const_reference to the last element in the vector.
 			*/
-		const_reference back( void ) const {
+		const_reference	back( void ) const {
 			return *(this->_end - 1);
 		};
 
@@ -281,21 +281,21 @@ class vector
 		/*___
 		 @Returns an iterator pointing to the first element in the vector.
 			*/
-		iterator				begin( void ){
+		iterator	begin( void ){
 			return (iterator(this->_start));
 		};
 
 		/*___
 		 @Returns a const_iterator pointing to the first element in the vector.
 			*/
-		const_iterator			begin( void ) const{
+		const_iterator	begin( void ) const{
 			return (const_iterator(this->_start));
 		};
 
 		/*___
 		 @Returns a reverse_iterator pointing to the last element in the vector.
 			*/
-		reverse_iterator		rbegin( void ){
+		reverse_iterator	rbegin( void ){
 			return (reverse_iterator(this->end()));
 		};
 
@@ -309,21 +309,21 @@ class vector
 		/*___
 		 @Returns an iterator referring to the past-the-end element in the vector container.
 			*/
-		iterator				end( void ){
+		iterator	end( void ){
 			return (iterator(this->_end));
 		};
 
 		/*___
 		 @Returns a const_iterator referring to the past-the-end element in the vector container.
 			*/
-		const_iterator			end( void ) const{
+		const_iterator	end( void ) const{
 			return (const_iterator(this->_end));
 		};
 
 		/*___
 		 @Returns a reverse_iterator pointing to the first element in the vector
 			*/
-		reverse_iterator 		rend(){
+		reverse_iterator	rend(){
 			return (reverse_iterator(this->begin()));
 		};
 
@@ -407,33 +407,55 @@ class vector
 		};
 
 		/*___
-		 @Insert single element.
+		 @Insert single element at position.
 		 @Return an iterator that points to the element inserted.
 			*/
-		iterator	insert (iterator position, const value_type& val){
-			(void)position;
-			(void)val;
-			return ;
+		iterator	insert (iterator position, const value_type& val) {
+			this->insert(position, 1, val);
+			return (iterator(position));
 		};
 
 		/*___
 		 @Fill insert.
-		 @Return an iterator that points to the first of the newly inserted elements.
+		 @Add n val at position.
 			*/
-		void insert (iterator position, size_type n, const value_type& val) {
-			(void)position;
-			(void)n;
-			(void)val;
+		void	insert (iterator position, size_type n, const value_type& val) {
+			size_type	keepPosition = 0;
+
+			for (iterator tmp = this->begin() ; tmp != position ; tmp++)
+				keepPosition++;
+			if ((this->_size + n) > this->_capacity)
+			{
+				this->resize(this->_size + n);
+				for (position = this->begin() ; keepPosition > 0 ; keepPosition--)
+					position++;
+			}
+			iterator	oldB = position;
+			iterator	oldE = position;
+			for (size_type i = n ; i > 0 ; i--)
+				oldE++;
+			while (oldE != this->end())
+			{
+				*oldE = *oldB;
+				oldE++;
+				oldB++;
+			}
+			while (n-- > 0)
+			{
+				*(position) = val;
+				position++;
+			}
 		};
 
 		/*___
 		 @Range insert.
-		 @Return an iterator that points to the first of the newly inserted elements.
+		 @Add range first to last at position.
 			*/
 		template<class InputIterator>
 		void	insert(iterator position,
 						InputIterator first,
-							InputIterator last){
+							InputIterator last,
+								typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL){
 			(void)position;
 			(void)first;
 			(void)last;

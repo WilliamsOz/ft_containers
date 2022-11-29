@@ -6,25 +6,29 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:07:31 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/28 16:26:20 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/29 13:36:28 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "containers.hpp"
 #include <vector>
 
+void	printVector(ft::vector<int> &v)
+{
+	std::cout << v.size() << std::endl;
+	for (ft::vector<int>::iterator	it = v.begin() ; it != v.end() ; it++)
+		std::cout << *it << std::endl;
+}
+
 int main( void )
 {
 	try
-	{//4.611.686.018.427.387.903
-		std::vector<int>	v(4, 42);
-		// std::cout << v.size() << std::endl;
-		// v.clear();
-		v.reserve(2);
-		// std::cout << v[0] << std::endl;
-		// std::cout << v[1] << std::endl;
-		// std::cout << v[2] << std::endl;
-		// std::cout << v[3] << std::endl;
+	{//4.611.686.018.427.387.903 ==> max_size()
+		ft::vector<int>	v(3, 42);
+		ft::vector<int>::iterator	it = v.begin();
+		it++;
+		v.insert(it, 3, -42);
+		printVector(v);
 	}
 	catch(const std::exception& e)
 	{
