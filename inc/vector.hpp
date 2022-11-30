@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:18:46 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/29 13:36:59 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:31:23 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -456,9 +456,36 @@ class vector
 						InputIterator first,
 							InputIterator last,
 								typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL){
-			(void)position;
-			(void)first;
-			(void)last;
+			size_type	keepPosition = 0;
+			for (iterator tmp = this->begin() ; tmp != position ; tmp++)
+				keepPosition++;
+			size_type	sizeAdded = 0;
+			for (InputIterator tmp = first ; tmp != last ; tmp++)
+				sizeAdded++;
+			if ((this->_size + sizeAdded) > this->_capacity)
+			{
+				this->resize(this->_size + sizeAdded);
+				for (position = this->begin(); keepPosition > 0 ; keepPosition--)
+					position++;
+			}
+			iterator	oldB = position;
+			iterator	oldE = position;
+			for (; sizeAdded > 0 ; sizeAdded--)
+			{
+				oldE++;
+			}
+			while (oldE != this->end())
+			{
+				*oldE = *oldB;
+				oldE++;
+				oldB++;
+			}
+			while (first != last)
+			{
+				*(position) = *first;
+				position++;
+				first++;
+			}
 			return ;
 		};
 

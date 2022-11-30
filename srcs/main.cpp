@@ -6,16 +6,31 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:07:31 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/29 13:36:28 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:32:03 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "containers.hpp"
+#define RED "\033[1;31m"
+#define GRN "\033[1;32m"
+#define YEL "\033[1;33m"
+#define BLU "\033[1;34m"
+#define MAG "\033[1;35m"
+#define CYA "\033[1;36m"
+#define COLOR(x) std::cout<<x;
+#define ENDCOLOR std::cout<<"\033[0m";
 #include <vector>
 
-void	printVector(ft::vector<int> &v)
+void	printRealVector(std::vector<int> &v)
 {
-	std::cout << v.size() << std::endl;
+	COLOR(MAG)std::cout << "Vector size is : " << v.size() << std::endl;ENDCOLOR
+	for (std::vector<int>::iterator	it = v.begin() ; it != v.end() ; it++)
+		std::cout << *it << std::endl;
+}
+
+void	printMyVector(ft::vector<int> &v)
+{
+	COLOR(GRN)std::cout << "Vector size is : " << v.size() << std::endl;ENDCOLOR
 	for (ft::vector<int>::iterator	it = v.begin() ; it != v.end() ; it++)
 		std::cout << *it << std::endl;
 }
@@ -24,11 +39,19 @@ int main( void )
 {
 	try
 	{//4.611.686.018.427.387.903 ==> max_size()
-		ft::vector<int>	v(3, 42);
-		ft::vector<int>::iterator	it = v.begin();
-		it++;
-		v.insert(it, 3, -42);
-		printVector(v);
+		// ft::vector<int>	vr;
+		std::vector<int>	v;
+		v.push_back(-42);
+		v.push_back(42);
+		v.push_back(42);
+		v.push_back(42);
+		v.erase(v.begin() + 1);
+		std::cout << v.capacity() << std::endl;
+		// std::vector<int>::iterator	itb = v.begin();
+		// std::vector<int>::iterator	ite = v.end();
+		// ft::vector<int>::iterator	pos = vr.begin();
+		// vr.insert(pos, itb, ite);
+		printRealVector(v);
 	}
 	catch(const std::exception& e)
 	{
