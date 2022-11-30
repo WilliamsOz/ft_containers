@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:18:46 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/30 15:22:43 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:12:44 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ class vector
 		/*___
 		 @Empty Container constructor (default constructor) -> Constructs an empty container with no elements.
 			*/
-		explicit vector( const allocator_type& alloc = allocator_type() ){
+		explicit vector( const allocator_type& alloc = allocator_type() ) {
 			this->_alloc = alloc;
 			this->_size = 0;
 			this->_capacity = 0;
@@ -72,7 +72,7 @@ class vector
 			*/
 		explicit vector( size_type n,
 							const value_type& val = value_type(),
-								const allocator_type& alloc = allocator_type() ){
+								const allocator_type& alloc = allocator_type() ) {
 			this->_alloc = alloc;
 			this->_size = n;
 			this->_capacity = n;
@@ -94,7 +94,7 @@ class vector
 		vector(InputIterator first,
 				InputIterator last,
 					const allocator_type& alloc = allocator_type(),
-						typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL){
+						typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL) {
 			InputIterator	tmp = first;
 
 			this->_size = 0;
@@ -115,7 +115,7 @@ class vector
 		/*___
 		 @Copy Constructor -> Constructs a container with a copy of each of the elements in x, in the same order.
 			*/
-		vector (const vector &copy){
+		vector (const vector &copy) {
 			this->_size = copy.size();
 			this->_capacity = this->_size;
 			this->_start = this->_alloc.allocate(this->_size);
@@ -135,7 +135,7 @@ class vector
 		 @This destroys all container elements, and deallocates all the storage capacity allocated
 			by the vector using its allocator.
 			*/
-		~vector(){
+		~vector() {
 			this->clear();
 			this->_alloc.deallocate(this->_start, this->_capacity);
 			return ;
@@ -148,7 +148,7 @@ class vector
 		 @The container preserves its current allocator,
 			which is used to allocate storage in case of reallocation
 			*/
-		vector& operator=( const vector &rhs ){
+		vector& operator=( const vector &rhs ) {
 			if (*this != rhs)
 			{
 				this->clear();
@@ -186,7 +186,7 @@ class vector
 		 @Assigns new contents to the vector, replacing its current contents, and modifying its size accordingly.
 		 @The new contents are count elements, each initialized to a copy of value.
 			*/
-		void assign (size_type count, const value_type& value){
+		void assign (size_type count, const value_type& value) {
 			this->clear();
 			this->reserve(count);
 			while (count > 0)
@@ -201,7 +201,7 @@ class vector
 		/*___
 		 @Returns a copy of the allocator object associated with the vector.
 			*/
-		allocator_type	get_allocator( void ) const{
+		allocator_type	get_allocator( void ) const {
 			return this->_alloc;
 		};
 
@@ -266,71 +266,61 @@ class vector
 			return *(this->_end - 1);
 		};
 
-		/*___????
-		 @Returns a direct pointer to the memory array used internally by the vector to store its owned elements.
-			*/
-		// value_type* data() {  };
-
-		/*___????
-		 @Returns a direct const_pointer to the memory array used internally by the vector to store its owned elements.
-			*/
-		// const value_type* data() const {  };
-
 	//\-----------------------------------Iterators-----------------------------------\/
 
 		/*___
 		 @Returns an iterator pointing to the first element in the vector.
 			*/
-		iterator	begin( void ){
+		iterator	begin( void ) {
 			return (iterator(this->_start));
 		};
 
 		/*___
 		 @Returns a const_iterator pointing to the first element in the vector.
 			*/
-		const_iterator	begin( void ) const{
+		const_iterator	begin( void ) const {
 			return (const_iterator(this->_start));
 		};
 
 		/*___
 		 @Returns a reverse_iterator pointing to the last element in the vector.
 			*/
-		reverse_iterator	rbegin( void ){
+		reverse_iterator	rbegin( void ) {
 			return (reverse_iterator(this->end()));
 		};
 
 		/*___
 		 @Returns a const_reverse_iterator pointing to the last element in the vector
 			*/
-		const_reverse_iterator	rbegin( void ) const{
+		const_reverse_iterator	rbegin( void ) const {
 			return (const_reverse_iterator(this->end()));
 		};
 
 		/*___
 		 @Returns an iterator referring to the past-the-end element in the vector container.
 			*/
-		iterator	end( void ){
+		iterator	end( void ) {
 			return (iterator(this->_end));
 		};
 
 		/*___
 		 @Returns a const_iterator referring to the past-the-end element in the vector container.
 			*/
-		const_iterator	end( void ) const{
+		const_iterator	end( void ) const {
 			return (const_iterator(this->_end));
 		};
 
 		/*___
 		 @Returns a reverse_iterator pointing to the first element in the vector
 			*/
-		reverse_iterator	rend(){
+		reverse_iterator	rend() {
 			return (reverse_iterator(this->begin()));
 		};
 
 		/*___
 		 @Returns a const_reverse_iterator pointing to the first element in the vector
 			*/
-		const_reverse_iterator	rend() const{
+		const_reverse_iterator	rend() const {
 			return (const_reverse_iterator(this->begin()));
 		};
 
@@ -361,7 +351,7 @@ class vector
 		/*___
 		 @Requests that the vector capacity be at least enough to contain n elements.
 			*/
-		void	reserve( size_type n ){
+		void	reserve( size_type n ) {
 			if (n > this->max_size())
 				throw(std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size"));
 
@@ -397,7 +387,7 @@ class vector
 		/*___
 		 @Removes all elements from the vector (which are destroyed), leaving the container with a size of 0.
 			*/
-		void	clear( void ){
+		void	clear( void ) {
 			for (size_type	i = 0 ; i < this->_size ; i++)
 			{
 				this->_end--;
@@ -455,7 +445,7 @@ class vector
 		void	insert(iterator position,
 						InputIterator first,
 							InputIterator last,
-								typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL){
+								typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL) {
 			size_type	keepPosition = 0;
 			for (iterator tmp = this->begin() ; tmp != position ; tmp++)
 				keepPosition++;
@@ -490,17 +480,14 @@ class vector
 		};
 
 		/*___
-		 @
+		 @Removes from the vector a single element.
 			*/
-		iterator	erase(iterator position){
+		iterator	erase(iterator position) {
 			size_t		tmpPosition = 0;
 
 			for (iterator tmp = this->begin() ; tmp != position ; tmp++)
 				tmpPosition++;
 			this->_alloc.destroy(this->_start + tmpPosition);
-			// position = this->begin();
-			// while (tmpPosition > 0)
-				// position++;
 			iterator	tmp = position;
 			while (tmp + 1 != this->end()) {
 				*tmp = *(tmp + 1);
@@ -508,23 +495,31 @@ class vector
 			}
 			this->_size -= 1;
 			--this->_end;
-			return (position);
+			return (iterator(position));
 		};
 
-
 		/*___
-		 @
+		 @Removes from the vector  a range of elements.
 			*/
-		iterator erase (iterator first, iterator last){
-			(void)first;
-			(void)last;
+		iterator erase (iterator first, iterator last) {
+			for (; first != last ; first++)
+				erase(first);
+			return (iterator(first));
 		};
 
 		/*___
 		 @
 			*/
 		void push_back (const value_type& val) {
-			(void)val;
+			if (this->_size == this->_capacity)
+			{
+				if (this->_size == 0)
+					reserve(1);
+				else
+					reserve(this->_size * 2);
+			}
+			this->_alloc.construct(this->_end, val);
+			++this->_end;
 			return ;
 		};
 
@@ -589,49 +584,42 @@ class vector
 
 };
 
+//\-----------------------------------Non-member operator overloads-----------------------------------\/
+
+template <class T, class Alloc>
+bool	operator==(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+	if (lhs._size != rhs._size)
+		return false;
+	return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+};
+
+template <class T, class Alloc>
+bool	operator!=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+	return (!(lhs == rhs));
+};
+
+template <class T, class Alloc>
+bool	operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+	return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+};
+
+template <class T, class Alloc>
+bool	operator<=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+	return (!(lhs > rhs));
+};
+
+template <class T, class Alloc>
+bool	operator>(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+	return (rhs < lhs);
+};
+
+template <class T, class Alloc>
+bool	operator>=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+	return (!(lhs < rhs));
+};
+
+
 //\-----------------------------------Non-member function overloads-----------------------------------\/
-
-// template <class T, class Alloc>
-// bool	operator==(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-// 	(void)lhs;
-// 	(void)rhs;
-// 	return true;
-// };
-
-// template <class T, class Alloc>
-// bool	operator!=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-// 	(void)lhs;
-// 	(void)rhs;
-// 	return true;
-// };
-
-// template <class T, class Alloc>
-// bool	operator< (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-// 	(void)lhs;
-// 	(void)rhs;
-// 	return true;
-// };
-
-// template <class T, class Alloc>
-// bool	operator<=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-// 	(void)lhs;
-// 	(void)rhs;
-// 	return true;
-// };
-
-// template <class T, class Alloc>
-// bool	operator> (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-// 	(void)lhs;
-// 	(void)rhs;
-// 	return true;
-// };
-
-// template <class T, class Alloc>
-// bool	operator>=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-// 	(void)lhs;
-// 	(void)rhs;
-// 	return true;
-// };
 
 	/*___
 	 @The contents of container x are exchanged with those of y.
