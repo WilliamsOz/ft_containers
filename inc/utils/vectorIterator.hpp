@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 09:37:03 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/23 18:57:14 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:19:15 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ class vectorIterator : public ft::iterator<random_access_iterator_tag, T>
 		
 		~vectorIterator() { };
 
-
 		vectorIterator & operator=( const vectorIterator &rhs ){
 			if (this != &rhs)
 				this->_ptr = rhs._ptr;
@@ -54,6 +53,30 @@ class vectorIterator : public ft::iterator<random_access_iterator_tag, T>
 		pointer		operator->() {
 			return this->_ptr;
 		};
+
+		vectorIterator<T>	operator+( difference_type n ) const {
+			vectorIterator<T>	tmp(*this);
+
+			tmp._ptr += n;
+			return tmp;
+		}
+
+		vectorIterator<T>&	operator+=( difference_type n ) const {
+			this->_ptr += n;
+			return *this;
+		}
+
+		vectorIterator<T>	operator-( difference_type n ) const {
+			vectorIterator<T>	tmp(*this);
+
+			tmp._ptr -= n;
+			return tmp;
+		}
+
+		vectorIterator<T>&	operator-=( difference_type n ) const {
+			this->_ptr -= n;
+			return *this;
+		}
 
 		vectorIterator<T>&	operator++( void ){  // ++_ptr
 			++this->_ptr;
@@ -102,6 +125,37 @@ class vectorIterator : public ft::iterator<random_access_iterator_tag, T>
 		bool				operator>=( const vectorIterator &rhs ) const{
 			return (rhs._ptr >= this->_ptr);
 		};
+
+		template <class _TB>
+		friend bool operator!=(const vectorIterator<_TB>& lhs, const vectorIterator<_TB>& rhs) {
+			return (lhs._ptr != rhs._ptr);
+		};
+
+		template <class _TB>
+		friend bool operator==(const vectorIterator<_TB>& lhs, const vectorIterator<_TB>& rhs) {
+			return (lhs._ptr == rhs._ptr);
+		};
+
+		template <class _TB>
+		friend bool operator<(const vectorIterator<_TB>& lhs, const vectorIterator<_TB>& rhs) {
+			return (lhs._ptr < rhs._ptr);
+		};
+
+		template <class _TB>
+		friend bool operator<=(const vectorIterator<_TB>& lhs, const vectorIterator<_TB>& rhs) {
+			return (lhs._ptr <= rhs._ptr);
+		};
+
+		template <class _TB>
+		friend bool operator>(const vectorIterator<_TB>& lhs, const vectorIterator<_TB>& rhs) {
+			return (lhs._ptr > rhs._ptr);
+		};
+
+		template <class _TB>
+		friend bool operator>=(const vectorIterator<_TB>& lhs, const vectorIterator<_TB>& rhs) {
+			return (lhs._ptr >= rhs._ptr);
+		};
+
 
 };
 

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:07:31 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/30 13:32:03 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:21:08 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,26 @@ int main( void )
 	try
 	{//4.611.686.018.427.387.903 ==> max_size()
 		// ft::vector<int>	vr;
-		std::vector<int>	v;
-		v.push_back(-42);
-		v.push_back(42);
-		v.push_back(42);
-		v.push_back(42);
-		v.erase(v.begin() + 1);
-		std::cout << v.capacity() << std::endl;
+		ft::vector<int>	v(4, 42);
+		v[0] = -42;
+		v[1] = 42;
+		v[2] = 21;
+		v[3] = 10;
+		// v.push_back(-42);
+		// v.push_back(42);
+		// v.push_back(21);
+		// v.push_back(10);
+		ft::vector<int>::iterator	it;
+		ft::vector<int>::iterator	ite;
+		it = v.erase(v.begin());
+		std::cout << *it << std::endl;
+		// std::cout << v.capacity() << std::endl;
 		// std::vector<int>::iterator	itb = v.begin();
 		// std::vector<int>::iterator	ite = v.end();
 		// ft::vector<int>::iterator	pos = vr.begin();
 		// vr.insert(pos, itb, ite);
-		printRealVector(v);
+		printMyVector(v);
+		// printRealVector(v);
 	}
 	catch(const std::exception& e)
 	{

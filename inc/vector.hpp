@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:18:46 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/30 13:31:23 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:22:43 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -493,8 +493,24 @@ class vector
 		 @
 			*/
 		iterator	erase(iterator position){
-			(void)position;
+			size_t		tmpPosition = 0;
+
+			for (iterator tmp = this->begin() ; tmp != position ; tmp++)
+				tmpPosition++;
+			this->_alloc.destroy(this->_start + tmpPosition);
+			// position = this->begin();
+			// while (tmpPosition > 0)
+				// position++;
+			iterator	tmp = position;
+			while (tmp + 1 != this->end()) {
+				*tmp = *(tmp + 1);
+				tmp++;
+			}
+			this->_size -= 1;
+			--this->_end;
+			return (position);
 		};
+
 
 		/*___
 		 @
