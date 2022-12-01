@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:07:31 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/12/01 15:41:34 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:12:39 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,6 @@ int main( void )
 	try
 	{
 		std::stack<int, std::vector<int> >	s;
-		s.push(42);
-		s.push(21);
-		s.push(10);
-		s.push(5);
-		s.push(2);
-		s.push(1);
-		s.push(0);
-		printStack(s);
 	}
 	catch(const std::exception& e)
 	{
