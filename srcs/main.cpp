@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:07:31 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/30 17:12:26 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/01 15:41:34 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,40 +20,59 @@
 #define COLOR(x) std::cout<<x;
 #define ENDCOLOR std::cout<<"\033[0m";
 #include <vector>
+#include <stack>
 
-void	printRealVector(std::vector<int> &v)
+void	printVector(std::vector<int> &v)
 {
 	COLOR(MAG)std::cout << "Vector size is : " << v.size() << std::endl;ENDCOLOR
 	for (std::vector<int>::iterator	it = v.begin() ; it != v.end() ; it++)
 		std::cout << *it << std::endl;
+	return ;
 }
 
-void	printMyVector(ft::vector<int> &v)
+void	printVector(ft::vector<int> &v)
 {
 	COLOR(GRN)std::cout << "Vector size is : " << v.size() << std::endl;ENDCOLOR
 	for (ft::vector<int>::iterator	it = v.begin() ; it != v.end() ; it++)
 		std::cout << *it << std::endl;
+	return ;
+}
+
+void	printStack(ft::stack<int, ft::vector<int> > &s)
+{
+	COLOR(GRN)std::cout << "Stack size is : " << s.size() << std::endl;ENDCOLOR
+	for (size_t i = s.size() ; i > 0 ; i--)
+	{
+		std::cout << s.top() << std::endl;
+		s.pop();
+	}
+	return ;
+}
+
+void	printStack(std::stack<int, std::vector<int> > &s)
+{
+	COLOR(MAG)std::cout << "Stack size is : " << s.size() << std::endl;ENDCOLOR
+	for (size_t i = s.size() ; i > 0 ; i--)
+	{
+		std::cout << s.top() << std::endl;
+		s.pop();
+	}
+	return ;
 }
 
 int main( void )
 {
 	try
-	{//4.611.686.018.427.387.903 ==> max_size()
-		// ft::vector<int>	vr;
-		ft::vector<int>	v(4, 42);
-		v.push_back(-42);
-		v.push_back(42);
-		// v.push_back(21);
-		// v.push_back(10);
-		// v.erase(v.begin(), v.end());
-		// std::cout << *it << std::endl;
-		// std::cout << v.capacity() << std::endl;
-		// std::vector<int>::iterator	itb = v.begin();
-		// std::vector<int>::iterator	ite = v.end();
-		// ft::vector<int>::iterator	pos = vr.begin();
-		// vr.insert(pos, itb, ite);
-		printMyVector(v);
-		// printRealVector(v);
+	{
+		std::stack<int, std::vector<int> >	s;
+		s.push(42);
+		s.push(21);
+		s.push(10);
+		s.push(5);
+		s.push(2);
+		s.push(1);
+		s.push(0);
+		printStack(s);
 	}
 	catch(const std::exception& e)
 	{

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:18:46 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/12/01 13:42:23 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/01 15:35:18 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -527,8 +527,8 @@ class vector
 			*/
 		void pop_back( void ) {
 			if (this->empty() == false) {
-				this->_alloc.destroy(--this->_end);
-				this->_size -=1 ;
+				this->_alloc.destroy(this->_end - 1);
+				this->_end--;
 			}
 			return ;
 		};
@@ -587,7 +587,6 @@ class vector
 
 /*___
  @Performs the == comparison operation between the vector containers lhs and rhs.
-
 	*/
 template <class T, class Alloc>
 bool	operator==(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
