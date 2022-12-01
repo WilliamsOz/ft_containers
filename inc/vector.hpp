@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:18:46 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/30 17:12:44 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:42:23 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,15 @@ class vector
 	public :
 	typedef	T		value_type;
 	typedef	Alloc	allocator_type;
-	// typedef	size_t	size_type;
 
 	typedef typename allocator_type::pointer				pointer;//T*
 	typedef typename allocator_type::reference				reference;//T&
 	typedef typename allocator_type::const_pointer			const_pointer;//const T*
 	typedef typename allocator_type::const_reference		const_reference;//const T&
-	typedef typename ft::vectorIterator<value_type>			iterator;
-	typedef typename ft::vectorIterator<const value_type>	const_iterator;
-	typedef typename allocator_type::difference_type		difference_type;
-	typedef typename allocator_type::size_type				size_type;
+	typedef typename ft::vectorIterator<value_type>			iterator;//value_type*
+	typedef typename ft::vectorIterator<const value_type>	const_iterator;//const value_type*
+	typedef typename allocator_type::difference_type		difference_type;//ptrdiff_t
+	typedef typename allocator_type::size_type				size_type;//size_t
 	typedef typename ft::reverse_iterator<iterator>			reverse_iterator;
 	typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
@@ -42,7 +41,7 @@ class vector
 		allocator_type	_alloc;
 						/*Allocator Object*/
 		size_t			_size;
-						/*Number of elements in the container*/
+						/*Number of elements inside the container*/
 		size_t			_capacity;
 						/*Number total of element that the containers can hold*/
 		pointer			_start;
@@ -508,7 +507,7 @@ class vector
 		};
 
 		/*___
-		 @
+		 @Adds val at the end of the vector, after its current last element.
 			*/
 		void push_back (const value_type& val) {
 			if (this->_size == this->_capacity)
@@ -586,6 +585,10 @@ class vector
 
 //\-----------------------------------Non-member operator overloads-----------------------------------\/
 
+/*___
+ @Performs the == comparison operation between the vector containers lhs and rhs.
+
+	*/
 template <class T, class Alloc>
 bool	operator==(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
 	if (lhs._size != rhs._size)
@@ -593,26 +596,41 @@ bool	operator==(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
 	return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
 };
 
+/*___
+ @Performs the != comparison operation between the vector containers lhs and rhs.
+	*/
 template <class T, class Alloc>
 bool	operator!=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
 	return (!(lhs == rhs));
 };
 
+/*___
+ @Performs the < comparison operation between the vector containers lhs and rhs.
+	*/
 template <class T, class Alloc>
 bool	operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
 	return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 };
 
+/*___
+ @Performs the <= comparison operation between the vector containers lhs and rhs.
+	*/
 template <class T, class Alloc>
 bool	operator<=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
 	return (!(lhs > rhs));
 };
 
+/*___
+ @Performs the > comparison operation between the vector containers lhs and rhs.
+	*/
 template <class T, class Alloc>
 bool	operator>(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
 	return (rhs < lhs);
 };
 
+/*___
+ @Performs the >= comparison operation between the vector containers lhs and rhs.
+	*/
 template <class T, class Alloc>
 bool	operator>=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
 	return (!(lhs < rhs));
