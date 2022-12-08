@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:18:46 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/12/01 16:35:51 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/08 13:09:25 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #define VECTOR_HPP
 
 #include "extern_library.hpp"
+#include "iterator.hpp"
+#include "lexicographical_compare.hpp"
+#include "equal.hpp"
+#include "is_integral.hpp"
+#include "enable_if.hpp"
+#include "vectorIterator.hpp"
 
 namespace	ft
 {

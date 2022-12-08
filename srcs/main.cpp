@@ -6,19 +6,11 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:07:31 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/12/01 16:12:39 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/08 13:08:09 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "containers.hpp"
-#define RED "\033[1;31m"
-#define GRN "\033[1;32m"
-#define YEL "\033[1;33m"
-#define BLU "\033[1;34m"
-#define MAG "\033[1;35m"
-#define CYA "\033[1;36m"
-#define COLOR(x) std::cout<<x;
-#define ENDCOLOR std::cout<<"\033[0m";
+#include "ft_containers.hpp"
 #include <vector>
 #include <stack>
 
@@ -64,7 +56,7 @@ int main( void )
 {
 	try
 	{
-		std::stack<int, std::vector<int> >	s;
+	
 	}
 	catch(const std::exception& e)
 	{

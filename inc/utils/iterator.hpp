@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:37:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/11/25 19:10:01 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/08 12:41:52 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,7 @@ class reverse_iterator
 
 		/*\___
 		 * Relational operators for reverse_iterator.
+		 2 friend ?
 		\*/
 		template <class ROIterator>
 		friend bool operator==(const reverse_iterator<ROIterator>& lhs, const reverse_iterator<ROIterator>& rhs){
@@ -240,7 +241,7 @@ class reverse_iterator
 
 		template <class ROIterator>
 		friend bool operator!=(const reverse_iterator<ROIterator>& lhs, const reverse_iterator<ROIterator>& rhs){
-			return (lhs.base() != rhs.base());
+			return (lhs.base() = rhs.base());
 		};
 
 		template <class ROIterator>
@@ -279,19 +280,6 @@ class reverse_iterator
 			return (rhs.base() - lhs.base());
 		};
 };
-
-template<class InputIterator>
-typename iterator_traits<InputIterator>::difference_type distance_between_iterators(InputIterator first, InputIterator last){
-	typename ft::iterator_traits<InputIterator>::difference_type	count;
-
-	count = 0;
-	while (first != last)
-	{
-		count++;
-		first++;
-	}
-	return count;
-}
 
 };
 
