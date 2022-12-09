@@ -6,13 +6,14 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:07:31 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/12/08 13:08:09 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:23:20 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_containers.hpp"
 #include <vector>
 #include <stack>
+#include <map>
 
 void	printVector(std::vector<int> &v)
 {
@@ -52,15 +53,23 @@ void	printStack(std::stack<int, std::vector<int> > &s)
 	return ;
 }
 
-int main( void )
+
+void	testForVector( void );
+
+int main( int ac, char **av )
 {
-	try
+	if (ac == 2 && static_cast<std::string>(av[1]).compare("vector_test") == 0)
+		testForVector();
+	else if (ac == 1)
 	{
-	
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
+		try
+		{
+			
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
 	}
 	return 0;
 }

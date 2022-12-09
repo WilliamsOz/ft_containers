@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:18:08 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/12/08 13:09:34 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:07:18 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "pair.hpp"
 #include "node.hpp"
 #include "treeIterator.hpp"
+#include "rbt.hpp"
 
 #define BLACK_NODE 0
 #define RED_NODE 1
@@ -40,13 +41,10 @@ class map {
 	typedef Allocator									allocator_type;
 
 
-	typedef typename allocator_type::reference			reference;
-	typedef typename allocator_type::const_referecen	const_reference;
+	typedef value_type&									reference;
+	typedef const value_type&							const_reference;
 	typedef typename allocator_type::pointer			pointer;
 	typedef typename allocator_type::const_pointer		const_pointer;
-
-	// typedef ft::mapIterator< >	iterator;
-	//.... const_iterator, reverse_iterator, const_reverse_iterator, difference_type, size_type.
 
 
 	//\-----------------------------------Nested class value_compare-----------------------------------\/
@@ -57,7 +55,7 @@ class map {
 		*/
 	class value_compare : std::binary_function<value_type, value_type, bool>
 	{
-		// friend class map;
+		friend class map;
 
 		protected:
 		Compare	comp;
@@ -75,16 +73,21 @@ class map {
 
 	};
 
+	private :
+		ft::rbt<value_type, value_compare>	_rbt;
+		// allocator_type						_alloc;
+
 
 	//\-----------------------------------Constructors-----------------------------------\/
 
+	public :
 	/*___
 	 @Empty constructor.
 		*/
-	// map( void ) {
+	map( void ) {
 		
-	// 	return ;
-	// };
+		return ;
+	};
 
 	/*___
 	 @Empty constructor.
@@ -216,12 +219,6 @@ class map {
 	 @
 		*/
 
-
-
-
-
-	private :
-		allocator_type	_alloc;
 };
 
 };
