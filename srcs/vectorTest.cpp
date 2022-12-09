@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:12:55 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/12/09 16:23:09 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/10 00:38:42 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,15 @@ void	showMyVector(ft::vector<int> &v, std::ostream &ofs)
 }
 
 void	testForVector( void ) {
-	ft::vector<int>		myVector(100, 42);
-	std::vector<int>	realVector(100, 42);
+	ft::vector<int>		myVector;
+	std::vector<int>	realVector;
 	std::ofstream		myOfs("./my_output_file.txt", std::ofstream::out | std::ofstream::trunc);
 	std::ofstream		realOfs("./real_output_file.txt", std::ofstream::out | std::ofstream::trunc);
 
-	// for (int i = 0; i < 100 ; i++)
-	// {
-	// 	p1 i p2
-	// 	myVector.push_back(i);
-	// 	realVector.push_back(i);
-	// }
+	for (int i = 0; i < 100 ; i++)
+		myVector.push_back(i);
+	for (int i = 0; i < 100 ; i++)
+		realVector.push_back(i);
 	showMyVector(myVector, myOfs);
 	showRealVector(realVector, realOfs);
-	// p1 myVector[0] p2
 }

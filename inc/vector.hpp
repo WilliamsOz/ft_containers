@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:18:46 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/12/08 13:09:25 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/10 00:40:56 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -359,23 +359,23 @@ class vector
 		void	reserve( size_type n ) {
 			if (n > this->max_size())
 				throw(std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size"));
-
 			if (n > this->_capacity) {
 				pointer			oldStart = this->_start;
 				pointer			oldEnd = this->_end;
-				size_type		oldSize = this->_size;
-				size_type		oldCapacity = this->capacity();
+				// size_type		oldSize = this->_size;
+				size_type		oldCapacity = this->_capacity;
 
 				this->_start = this->_alloc.allocate(n);
 				this->_end = this->_start;
 				this->_size = 0;
 				this->_capacity = n;
-				while (oldStart != oldEnd)
+				for (pointer tmp = oldStart ; tmp != oldEnd ; tmp++)
 				{
-					this->_alloc.construct(this->_end++, *oldStart++);
+					this->_alloc.construct(this->_end, *tmp);
 					this->_size++;
+					this->_end++;
 				}
-				this->_alloc.deallocate(oldStart - oldSize, oldCapacity);
+				this->_alloc.deallocate(oldStart, oldCapacity);
 			}
 		};
 
@@ -515,16 +515,18 @@ class vector
 		/*___
 		 @Adds val at the end of the vector, after its current last element.
 			*/
-		void push_back (const value_type& val) {
+		void push_back (const value_type &val) {
 			if (this->_size == this->_capacity)
 			{
 				if (this->_size == 0)
 					reserve(1);
 				else
+				{
 					reserve(this->_size * 2);
+				}
 			}
-			this->_alloc.construct(this->_end, val);
-			++this->_end;
+			this->_alloc.construct(this->_end++, val);
+			this->_size++;
 			return ;
 		};
 
