@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:12:55 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/12/13 12:35:43 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:07:46 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ void	showMyVector(ft::vector<int> &v, std::ofstream &ofs) {
 	return ;
 }
 
-void	emptyConstructor( std::ofstream &myOfs, std::ofstream &realOfs ) {
+void	emptyConstructor(std::ofstream &myOfs, std::ofstream &realOfs) {
 	std::vector<int>	realVector;
 	ft::vector<int>		myVector;
 
-	showMyVector(myVector, myOfs);
-	showRealVector(realVector, realOfs);
+	if (realVector.empty() && myVector.empty()) {
+		showRealVector(realVector, realOfs);
+		showMyVector(myVector, myOfs);
+	}
 	return ;
 }
 
@@ -74,6 +76,100 @@ void	copyConstructor(std::ofstream &myOfs, std::ofstream &realOfs) {
 	return ;
 }
 
+void	assignRangeTest(std::ofstream &myOfs, std::ofstream &realOfs) {
+	std::vector<int>	tmpReal(4, 42);
+	ft::vector<int>		tmpMine(4, 42);
+
+	for (int i = 0 ; i < 38 ; i++) {
+		tmpReal.push_back(i);
+		tmpMine.push_back(i);
+	}
+	std::vector<int>	realVector;
+	ft::vector<int>		myVector;
+	realVector.assign(tmpReal.begin(), tmpReal.end());
+	myVector.assign(tmpMine.begin(), tmpMine.end());
+	showMyVector(myVector, myOfs);
+	showRealVector(realVector, realOfs);
+	return ;
+}
+
+void	assignFillTest(std::ofstream &myOfs, std::ofstream &realOfs) {
+	std::vector<int>	realVector;
+	ft::vector<int>		myVector;
+
+	realVector.assign(42, 42);
+	myVector.assign(42, 42);
+	showMyVector(myVector, myOfs);
+	showRealVector(realVector, realOfs);
+	return ;
+}
+
+
+void	assignTest(std::ofstream &myOfs, std::ofstream &realOfs) {
+	assignRangeTest(myOfs, realOfs);
+	assignFillTest(myOfs, realOfs);
+	return ;
+}
+
+void	atTest(std::ofstream &myOfs, std::ofstream &realOfs) {
+	std::vector<int>	realVector;
+	ft::vector<int>		myVector;
+
+	myOfs << "at Test :" << std::endl;
+	realOfs << "at Test :" << std::endl;
+	for (int i = 0 ; i < 42 ; i++) {
+		realVector.push_back(i);
+		myVector.push_back(i);
+	}
+	myOfs << "Vector size is " << myVector.size() << std::endl;
+	realOfs << "Vector size is " << realVector.size() << std::endl;
+	for (int i = 0 ; i < 42 ; i++) {
+		realOfs << realVector.at(i) << std::endl;
+		myOfs << myVector.at(i) << std::endl;
+	}
+	return ;
+}
+
+void	operatorTest(std::ofstream &myOfs, std::ofstream &realOfs) {
+	std::vector<int>	realVector;
+	ft::vector<int>		myVector;
+
+	myOfs << "Operator Test :" << std::endl;
+	realOfs << "Operator Test :" << std::endl;
+	for (int i = 0 ; i < 42 ; i++) {
+		realVector.push_back(i);
+		myVector.push_back(i);
+	}
+	myOfs << "Vector size is " << myVector.size() << std::endl;
+	realOfs << "Vector size is " << realVector.size() << std::endl;
+	for (int i = 0 ; i < 42 ; i++) {
+		realOfs << realVector[i] << std::endl;
+		myOfs << myVector[i] << std::endl;
+	}
+	return ;
+}
+
+void	frontTest(std::ofstream &myOfs, std::ofstream &realOfs) {
+	std::vector<int>	realVector;
+	ft::vector<int>		myVector;
+
+	myOfs << "Front Test :" << std::endl;
+	realOfs << "Front Test :" << std::endl;
+	for (int i = 100 ; i > 0 ; i--) {
+		realVector.push_back(i);
+		myVector.push_back(i);
+	}
+	myOfs << "Vector size is " << myVector.size() << std::endl;
+	realOfs << "Vector size is " << realVector.size() << std::endl;
+	for (int i = 0 ; i < 100 ; i++) {
+		realOfs << realVector.front() << std::endl;
+		myOfs << myVector.front() << std::endl;
+		realVector.erase(realVector.begin());
+		myVector.erase(myVector.begin());
+	}
+	return ;
+}
+
 void	testForVector( void ) {
 	std::ofstream		myOfs("./my_output_file.txt", std::ofstream::out | std::ofstream::trunc);
 	std::ofstream		realOfs("./real_output_file.txt", std::ofstream::out | std::ofstream::trunc);
@@ -82,6 +178,10 @@ void	testForVector( void ) {
 	fillConstructor(myOfs, realOfs);
 	rangeConstructor(myOfs, realOfs);
 	copyConstructor(myOfs, realOfs);
+	assignTest(myOfs, realOfs);
+	atTest(myOfs, realOfs);
+	operatorTest(myOfs, realOfs);
+	frontTest(myOfs, realOfs);
 	myOfs.close();
 	realOfs.close();
 	return ;

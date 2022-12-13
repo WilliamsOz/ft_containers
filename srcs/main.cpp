@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:07:31 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/12/13 12:20:13 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:48:44 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,10 @@ int main( int ac, char **av )
 {
 	try
 	{
-		if (ac == 2 && static_cast<std::string>(av[1]).compare("vector_test") == 0)
-			testForVector();
-		else if (ac == 1)
-		{
+		if (ac == 1)
 			return 0;
-		}
+		else if (ac == 2 && static_cast<std::string>(av[1]).compare("vector_test") == 0)
+			testForVector();
 	}
 	catch(const std::exception& e)
 	{
