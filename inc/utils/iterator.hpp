@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:37:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/12/08 14:34:17 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:02:24 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ class reverse_iterator
 
 		template <class ROIterator>
 		friend bool operator!=(const reverse_iterator<ROIterator>& lhs, const reverse_iterator<ROIterator>& rhs){
-			return (lhs.base() = rhs.base());
+			return (!(lhs.base() == rhs.base()));
 		};
 
 		template <class ROIterator>

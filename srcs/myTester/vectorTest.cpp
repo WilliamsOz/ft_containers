@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:12:55 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/12/13 13:07:46 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:56:27 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,18 +170,59 @@ void	frontTest(std::ofstream &myOfs, std::ofstream &realOfs) {
 	return ;
 }
 
+void	backTest(std::ofstream &myOfs, std::ofstream &realOfs) {
+	std::vector<int>	realVector(42, -42);
+	ft::vector<int>		myVector(42, -42);
+
+	myOfs << "Back Test :" << std::endl;
+	realOfs << "Back Test :" << std::endl;
+	myOfs << "Vector size is " << myVector.size() << std::endl;
+	realOfs << "Vector size is " << realVector.size() << std::endl;
+	while (realVector.empty() == false && myVector.empty() == false)
+	{
+		realOfs << realVector.back() << std::endl;
+		myOfs << myVector.back() << std::endl;
+		realVector.pop_back();
+		myVector.pop_back();
+	}
+	return ;
+}
+
+void	reverseIteratorTest(std::ofstream &myOfs, std::ofstream &realOfs) {
+	std::vector<int>			realVector;
+	ft::vector<int>				myVector;
+	ft::vector<int>::reverse_iterator	itMy;
+	std::vector<int>::reverse_iterator	itReal;
+
+	for (int i = 0 ; i < 100 ; i++) {
+		realVector.push_back(i);
+		myVector.push_back(i);
+	}
+	itMy = myVector.rbegin();
+	itReal = realVector.rbegin();
+	while (itMy != myVector.rend() && itReal != realVector.rend()) {
+		myOfs << *itMy << std::endl;
+		realOfs << *itReal << std::endl;
+		++itMy;
+		++itReal;
+	}
+	return ;
+}
+
 void	testForVector( void ) {
 	std::ofstream		myOfs("./my_output_file.txt", std::ofstream::out | std::ofstream::trunc);
 	std::ofstream		realOfs("./real_output_file.txt", std::ofstream::out | std::ofstream::trunc);
 
-	emptyConstructor(myOfs, realOfs);
-	fillConstructor(myOfs, realOfs);
-	rangeConstructor(myOfs, realOfs);
-	copyConstructor(myOfs, realOfs);
-	assignTest(myOfs, realOfs);
-	atTest(myOfs, realOfs);
-	operatorTest(myOfs, realOfs);
-	frontTest(myOfs, realOfs);
+	// emptyConstructor(myOfs, realOfs);
+	// fillConstructor(myOfs, realOfs);
+	// rangeConstructor(myOfs, realOfs);
+	// copyConstructor(myOfs, realOfs);
+	// assignTest(myOfs, realOfs);
+	// atTest(myOfs, realOfs);
+	// operatorTest(myOfs, realOfs);
+	// frontTest(myOfs, realOfs);
+	// backTest(myOfs, realOfs);
+	reverseIteratorTest(myOfs, realOfs);
 	myOfs.close();
 	realOfs.close();
 	return ;
