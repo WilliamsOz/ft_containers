@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:18:46 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/12/10 00:40:56 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:33:50 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ class vector
 	//\-----------------------------------Constructors-----------------------------------\/
 
 		/*___
-		 @Empty Container constructor (default constructor) -> Constructs an empty container with no elements.
+		 @Empty constructor (default constructor) -> Constructs an empty container with no elements.
 			*/
 		explicit vector( const allocator_type& alloc = allocator_type() ) {
 			this->_alloc = alloc;
@@ -121,14 +121,16 @@ class vector
 		 @Copy Constructor -> Constructs a container with a copy of each of the elements in x, in the same order.
 			*/
 		vector (const vector &copy) {
-			this->_size = copy.size();
-			this->_capacity = this->_size;
-			this->_start = this->_alloc.allocate(this->_size);
+			this->_size = copy._size;
+			this->_capacity = copy._capacity;
+			this->_start = this->_alloc.allocate(this->_capacity);
 			this->_end = this->_start;
-			for (size_t i = 0 ; i < this->_size ; i++)
+			pointer tmp = copy._start;
+			for (size_type i = 0 ; i < copy._size ; i++)
 			{
-				this->_alloc.construct(this->_end, *this->_end);
+				this->_alloc.construct(this->_end, *tmp);
 				this->_end++;
+				tmp++;
 			}
 		};
 
@@ -362,7 +364,6 @@ class vector
 			if (n > this->_capacity) {
 				pointer			oldStart = this->_start;
 				pointer			oldEnd = this->_end;
-				// size_type		oldSize = this->_size;
 				size_type		oldCapacity = this->_capacity;
 
 				this->_start = this->_alloc.allocate(n);

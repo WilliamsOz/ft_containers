@@ -6,13 +6,13 @@
 #    By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 10:10:04 by wiozsert          #+#    #+#              #
-#    Updated: 2022/12/09 15:18:46 by wiozsert         ###   ########.fr        #
+#    Updated: 2022/12/13 12:18:29 by wiozsert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_containers
 
-SRC = main.cpp vectorTest.cpp
+SRC = main.cpp ./myTester/vectorTest.cpp
 
 SRCS = $(addprefix ./srcs/, $(SRC) )
 

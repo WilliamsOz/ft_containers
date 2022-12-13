@@ -1,1 +1,1 @@
-reset ; make re ; clear ; ./ft_containers
+reset ; make re ; clear ; ./ft_containers vector_test ; diff my_output_file.txt real_output_file.txt ;
